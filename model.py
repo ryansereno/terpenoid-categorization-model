@@ -29,8 +29,18 @@ model.compile(optimizer=optimizer,
               metrics=['accuracy'])
 
 # Fit the model to the training data
-model.fit(terpene_train_data, effect_training_labels, epochs=500)
+model.fit(terpene_train_data, effect_training_labels, epochs=5)
 
 # Evaluate the model on the test data
-test_loss, test_acc = model.evaluate(terpene_test_data, effect_testing_labels)
-print('Test accuracy:', test_acc)
+#test_loss, test_acc = model.evaluate(terpene_test_data, effect_testing_labels)
+#print('Test accuracy:', test_acc)
+
+# Make predictions on the test set
+predictions = model.predict(terpene_test_data)
+
+# Convert the predictions to class labels
+class_labels = np.argmax(predictions, axis=1) #THIS IS INCORRECT
+
+# Iterate through the test set and print the predictions and true labels
+for i, (class_labels, true_label) in enumerate(zip(predictions, effect_testing_labels)):
+    print(f"Sample {i}: Prediction: {class_labels}, True label: {true_label}")
