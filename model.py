@@ -23,12 +23,13 @@ model = tf.keras.Sequential([
 ])
 
 # Compile the model
-model.compile(optimizer='adam',
+optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+model.compile(optimizer=optimizer,
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
 # Fit the model to the training data
-model.fit(terpene_train_data, effect_training_labels, epochs=550)
+model.fit(terpene_train_data, effect_training_labels, epochs=500)
 
 # Evaluate the model on the test data
 test_loss, test_acc = model.evaluate(terpene_test_data, effect_testing_labels)
